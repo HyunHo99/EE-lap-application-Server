@@ -1,11 +1,12 @@
 from flask import Blueprint
+import json
 
 bp = Blueprint('main', __name__, url_prefix='/')
 
 
-@bp.route('/')
+@bp.route('/',methods=['GET'])
 def index():
-    return 'Pybo index'
+    return json.dumps(["hi"])
 
 
 @bp.route('/hello')
