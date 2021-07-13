@@ -18,8 +18,9 @@ def create_app():
     migrate.init_app(app, db)
 
     from . import models
-    from .views import main_views, post_views
+    from .views import main_views, post_views, lab_views
     app.register_blueprint(main_views.bp)
     app.register_blueprint(post_views.bp)
+    app.register_blueprint(lab_views.bp)
     
     return app
