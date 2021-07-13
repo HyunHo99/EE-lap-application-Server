@@ -28,8 +28,9 @@ def hello_pybo():
     Subject = request.form["subject"]
     Content = request.form["content"]
     User = request.form["user"]
+    Labcode = request.form["labcode"]
     Create_date = datetime.now()
-    p=Post(subject = Subject, content = Content, create_date = Create_date, user = User)
+    p=Post(subject = Subject, content = Content, create_date = Create_date, user = User, labcode = Labcode)
     db.session.add(p)
     db.session.commit()
     return json.dumps(['successed'])
@@ -43,7 +44,7 @@ def return_comments(post_id):
     for i in comments:
         data.append({"content":i.content, "create_date":i.create_date.strftime("%m/%d/%Y, %H:%M:%S"), "id":i.id, "user":i.user})
     p = Post.query.get(post_id)
-    diction["post"]={"subject":p.subject,"content":p.content, "create_date":p.create_date.strftime("%m/%d/%Y, %H:%M:%S"),"user":p.user}
+    diction["post"]={"subject":p.subject,"content":p.content, "create_date":p.create_date.strftime("%m/%d/%Y, %H:%M:%S"),"user":p.user, "labcode":p.labcode}
     diction["data"]=data
     return json.dumps(diction)
 

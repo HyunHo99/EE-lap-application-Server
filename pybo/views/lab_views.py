@@ -44,3 +44,16 @@ def removeLikedLabs(user_id, labcode):
 
 
     return json.dumps("fail")
+
+@bp.route('/getPosts/',methods=['POST'])
+def getPosts():
+    labcodeList = request.form["labcodes"].split(",")
+    print(labcodeList)
+    searchedPost = Post.query.filter(Post.labcode.in_(labcodeList)).order_by(Post.create_date.desc())
+    data = []
+    diction = {}
+    for i in searchedPost:
+        data.append({"id":i.id, "subject":i.subject,"create_date":i.create_date.strftime("%m/%d/%Y, %H:%M:%S"), "content":i.content[:80]})
+    print(data)
+    diction["data"]=data
+    return json.dumps(diction)

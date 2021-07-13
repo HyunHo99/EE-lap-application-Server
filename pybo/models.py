@@ -6,6 +6,7 @@ class Post(db.Model):
     content = db.Column(db.Text(), nullable=False)
     create_date = db.Column(db.DateTime(), nullable=False)
     user = db.Column(db.Text(), nullable=False)
+    labcode = db.Column(db.String(4), nullable=True)
 
 
 class Comment(db.Model):
